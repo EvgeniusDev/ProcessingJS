@@ -20,10 +20,20 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file("signing-key.jks")
+            storePassword "O6lako@a"
+            keyAlias "LiteSoft"
+            keyPassword "O6lako@a"
+        }
+    }
+    
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -36,7 +46,6 @@ android {
         viewBinding true
         
     }
-    
 }
 
 dependencies {

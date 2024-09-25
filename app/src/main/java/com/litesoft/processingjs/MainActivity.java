@@ -1,8 +1,10 @@
 package com.litesoft.processingjs;
 
+import android.content.Intent;
 import android.widget.LinearLayout;
 import android.os.Bundle;
 
+import android.widget.Toast;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.GravityCompat;
@@ -22,6 +24,8 @@ import com.litesoft.processingjs.databinding.ActivityMainBinding;
 import com.litesoft.processingjs.editor.CodeEditorFragment;
 
 import com.litesoft.processingjs.events.FileDeletedEvent;
+import com.litesoft.processingjs.events.FileRenamedEvent;
+import com.litesoft.processingjs.events.FolderRenamedEvent;
 import com.litesoft.processingjs.explorer.FileExplorerFragment;
 import com.litesoft.processingjs.editor.CodeEditorView;
 
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             onMenuItemClicked(item.getItemId());
             return true;
         });
-
+        
         drawerLayout = binding.drawer;
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, binding.toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.addDrawerListener(drawerToggle);
@@ -105,7 +109,12 @@ public class MainActivity extends AppCompatActivity {
         openFile(projectFile.getFile("scripts/sketch.js"));
     }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+      //  saveFiles();
+    }
+    
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -127,11 +136,14 @@ public class MainActivity extends AppCompatActivity {
     }
     
     private void detachFragment() {
+        if (currentFragment == null) {
+            return;
+        }
+        
         getSupportFragmentManager()
         .beginTransaction()
         .detach(currentFragment)
         .commit();
-        currentFragment = null;
     }
     
     private void showTabPopup(final int tabPosition) {
@@ -159,6 +171,11 @@ public class MainActivity extends AppCompatActivity {
         openedFiles.remove(tabPosition);
         tabLayout.removeTabAt(tabPosition);
             
+        if (tabCount() == 0) {
+            closeAllTabs();
+            return;
+        }
+        
         if (tabPosition == 0 && tabCount() > 0) {
             setCurrentFragment(0);
             return;
@@ -172,10 +189,6 @@ public class MainActivity extends AppCompatActivity {
         if (tabPosition > 0 && tabPosition < tabCount()) {
             setCurrentFragment(tabPosition);
             return;
-        }
-            
-        if (tabCount() == 0) {
-            detachFragment();
         }
     }
     
@@ -192,6 +205,19 @@ public class MainActivity extends AppCompatActivity {
     private void onMenuItemClicked(int id) {
         if (id == R.id.menu_save) {
             saveFiles();
+        } else if (id == R.id.menu_run) {
+            saveFiles();
+            runSketch();
+        }
+    }
+    
+    private void runSketch() {
+        File index = projectFile.getFile("index.html");
+        
+        if (index != null && index.exists()) {
+            Intent intent = new Intent(this, PlayActivity.class);
+            intent.putExtra(PlayActivity.EXTRA_URL, index.getAbsolutePath());
+            startActivity(intent);
         }
     }
     
@@ -202,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
     }
     
     private void openFile(File file) {
-        if (isTextFile(file)) {
+        if (file.exists() && isTextFile(file)) {
             if (isFileOpened(file)) {
                 setCurrentFragment(getFileTabPosition(file));
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -258,6 +284,28 @@ public class MainActivity extends AppCompatActivity {
             if (file.getName().equals(event.file.getName())) {
                 int pos = getFileTabPosition(event.file);
                 closeTab(pos);
+                return;
+            }
+        }
+    }
+    
+    @Subscribe
+    public void onFileRenamedEvent(FileRenamedEvent event) {
+        for (TextFile file : openedFiles) {
+            if (file.getPath().equals(event.oldPath)) {
+                int pos = getFileTabPosition(file.getBaseFile());
+                file.setFile(event.file);
+                tabLayout.getTabAt(pos).setText(event.file.getName());
+                return;
+            }
+        }
+    }
+    
+    @Subscribe
+    public void onFolderRenamedEvent(FolderRenamedEvent event) {
+        for (TextFile file : openedFiles) {
+            if (file.getPath().equals(event.oldParentPath)) {
+                file.setFile(event.child);
                 return;
             }
         }

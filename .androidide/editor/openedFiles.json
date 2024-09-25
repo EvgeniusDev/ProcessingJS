@@ -1,22 +1,52 @@
 {
   "allFiles": [
     {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/PlayActivity.java",
+      "selection": {
+        "end": {
+          "column": 8,
+          "index": 1008,
+          "line": 28
+        },
+        "start": {
+          "column": 8,
+          "index": 1008,
+          "line": 28
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/AndroidManifest.xml",
+      "selection": {
+        "end": {
+          "column": 42,
+          "index": 617,
+          "line": 15
+        },
+        "start": {
+          "column": 42,
+          "index": 617,
+          "line": 15
+        }
+      }
+    },
+    {
       "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/MainActivity.java",
       "selection": {
         "end": {
           "column": 9,
-          "index": 8240,
-          "line": 262
+          "index": 4166,
+          "line": 114
         },
         "start": {
           "column": 9,
-          "index": 8240,
-          "line": 262
+          "index": 4166,
+          "line": 114
         }
       }
     },
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/project/files/TextFile.java",
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/project/ProjectModifier.java",
       "selection": {
         "end": {
           "column": 0,
@@ -31,7 +61,37 @@
       }
     },
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/project/files/AbstractFile.java",
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/project/files/ProjectFile.java",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/res/values/themes.xml",
+      "selection": {
+        "end": {
+          "column": 78,
+          "index": 1786,
+          "line": 33
+        },
+        "start": {
+          "column": 78,
+          "index": 1786,
+          "line": 33
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/res/layout/activity_play.xml",
       "selection": {
         "end": {
           "column": 0,
@@ -46,5 +106,5 @@
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/MainActivity.java"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/PlayActivity.java"
 }

@@ -12,6 +12,16 @@ import java.nio.file.Files;
 
 public class FileUtil {
     
+    public static void createFile(String path) {
+        try {
+            File file = new File(path);
+            file.createNewFile();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static String readFile(File file) {
         StringBuilder sb = new StringBuilder();
         FileReader fr = null;
@@ -43,5 +53,28 @@ public class FileUtil {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public static void deleteFile(File file) {
+        if (file.isFile()) {
+            file.delete();
+            return;
+        }
+
+        File[] fileArr = file.listFiles();
+
+        if (fileArr != null) {
+            for (File subFile : fileArr) {
+                if (subFile.isDirectory()) {
+                    deleteFile(subFile.getAbsoluteFile());
+                }
+
+                if (subFile.isFile()) {
+                    subFile.delete();
+                }
+            }
+        }
+
+        file.delete();
     }
 }

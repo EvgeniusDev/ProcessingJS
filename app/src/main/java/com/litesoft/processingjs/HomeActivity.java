@@ -22,11 +22,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.shape.MaterialShapeDrawable;
 import com.litesoft.processingjs.databinding.ActivityHomeBinding;
 
+import com.litesoft.processingjs.databinding.DialogTextinputBinding;
 import com.litesoft.processingjs.project.CreatingProjectDialog;
 import com.litesoft.processingjs.project.files.ProjectFile;
 import com.litesoft.processingjs.project.ProjectListAdapter;
 
 import com.litesoft.processingjs.project.ProjectModifier;
+import com.litesoft.processingjs.utils.DeleteFileDialog;
+import com.litesoft.processingjs.utils.FileNameInputValidator;
+import com.litesoft.processingjs.utils.FileUtil;
 import com.litesoft.processingjs.utils.RecyclerSpaceDecorator;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -52,9 +56,9 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         
         projectFiles = new ArrayList<>();
-        projectListAdapter = new ProjectListAdapter(this, pos -> {
-            openProject(projectFiles.get(pos));
-        });
+        projectListAdapter = new ProjectListAdapter(this);
+        projectListAdapter.setOnItemClickListener(pos -> openProject(projectFiles.get(pos)));
+        projectListAdapter.setOnItemMenuClickListener((itemId, pos) -> onProjectMenuClick(itemId, pos));
         
         binding.projects.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         binding.projects.setAdapter(projectListAdapter);
@@ -131,6 +135,66 @@ public class HomeActivity extends AppCompatActivity {
         
         projectListAdapter.setData(projectFiles);
         projectListAdapter.notifyDataSetChanged();
+    }
+    
+    private void onProjectMenuClick(int itemId, int pos) {
+        var project = projectFiles.get(pos);
+        
+        if (itemId == R.id.menu_rename_file) {
+            renameProject(project);
+        } else if (itemId == R.id.menu_delete_file) {
+            deleteProject(project);
+        }
+    }
+    
+    private void renameProject(ProjectFile project) {
+        var binding = DialogTextinputBinding.inflate(getLayoutInflater());
+        var inputLayout = binding.inputLayout;
+        var editText = binding.editText;
+        
+        inputLayout.setHint("Введите название");
+        editText.setText(project.getName());
+        
+        var dialog = new MaterialAlertDialogBuilder(this)
+        .setTitle("Переименовать файл")
+        .setView(binding.getRoot())
+        .setNegativeButton("Отмена", null)
+        .setPositiveButton("Ок", (d, w) -> {
+            continueRenaming(editText.getText().toString(), project);
+        })
+        .create();
+        
+        dialog.show();
+        
+        var files = new ArrayList<File>();
+        
+        for (ProjectFile p : projectFiles) {
+            files.add(p.getBaseFile());
+        }
+        
+        var validator = new FileNameInputValidator(editText, files, project.getBaseFile(), msg -> {
+            inputLayout.setErrorEnabled(msg.isEmpty());
+            inputLayout.setError(msg);
+            dialog.getButton(dialog.BUTTON_POSITIVE).setEnabled(msg.isEmpty());
+        });
+        
+        validator.validate();
+    }
+    
+    private void continueRenaming(String name, ProjectFile project) {
+        File oldFile = project.getBaseFile();
+        File newFile = new File(oldFile.getParent(), name);
+        oldFile.renameTo(newFile);
+        project.setFile(newFile);
+        projectListAdapter.notifyDataSetChanged();
+    }
+    
+    private void deleteProject(ProjectFile project) {
+        var deleteDialog = new DeleteFileDialog(this, () -> {
+            FileUtil.deleteFile(project.getBaseFile());
+            projectFiles.remove(project);
+            projectListAdapter.notifyDataSetChanged();
+        });
     }
     
     private void beginNewProject() {

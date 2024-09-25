@@ -10,8 +10,7 @@ import android.util.AttributeSet;
 import android.widget.EditText;
 
 import com.litesoft.processingjs.GlobalEventBus;
-import com.litesoft.processingjs.events.FileEditedEvent;
-import com.litesoft.processingjs.events.FileSavedEvent;
+
 import com.litesoft.processingjs.project.files.TextFile;
 import com.litesoft.processingjs.utils.FileUtil;
 import java.util.regex.Pattern;

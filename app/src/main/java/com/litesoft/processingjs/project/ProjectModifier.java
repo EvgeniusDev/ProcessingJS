@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.widget.Toast;
 
+import com.litesoft.processingjs.utils.FileUtil;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,6 +42,15 @@ public class ProjectModifier {
         copyFileFromAssets("template/p5.min.js", new File(libs, "p5.min.js").getPath());
         copyFileFromAssets("template/sketch.js", new File(scripts, "sketch.js").getPath());
         copyFileFromAssets("template/config.json", new File(file, "config.cfg").getPath());
+        
+        updateBaseRef();
+    }
+    
+    private void updateBaseRef() {
+        File index = projectFile.getFile("index.html");
+        String text = FileUtil.readFile(index);
+        text = text.replace("PROJECT_PATH", "file://" + projectFile.getBaseFile().getAbsolutePath() + "/");
+        FileUtil.writeFile(index, text);
     }
     
     private void copyFileFromAssets(String assetFileName, String destinationFilePath) {

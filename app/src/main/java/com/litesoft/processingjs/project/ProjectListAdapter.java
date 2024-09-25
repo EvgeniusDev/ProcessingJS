@@ -5,20 +5,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.litesoft.processingjs.databinding.ItemProjectBinding;
 import com.litesoft.processingjs.project.files.ProjectFile;
+import com.litesoft.processingjs.R;
 import java.util.List;
 
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.Holder> {
+    private Context context;
     private LayoutInflater inflater;
     private List<ProjectFile> projects;
-    private ItemTouchListener listener;
+    private OnItemClickListener itemClickListener;
+    private OnItemMenuClickListener itemMenuClickListener;
     
-    public ProjectListAdapter(Context context, ItemTouchListener listener) {
+    public ProjectListAdapter(Context context) {
+        this.context = context;
         this.inflater = LayoutInflater.from(context);
-        this.listener = listener;
     }
     
     public void setData(List<ProjectFile> data) {
@@ -49,11 +53,38 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     @Override
     public void onBindViewHolder(ProjectListAdapter.Holder holder, int pos) {
         var project = projects.get(pos);
-        holder.root.setOnClickListener(v -> listener.onClick(pos));
         holder.title.setText(project.getName());
+        holder.root.setOnClickListener(v -> itemClickListener.onClick(pos));
+        holder.root.setOnLongClickListener(v -> {
+            showMenu(pos, holder.root);
+            return true;
+        });
     }
     
-    public interface ItemTouchListener {
+    private void showMenu(int pos, View anchor) {
+        var menu = new PopupMenu(context, anchor);
+        menu.inflate(R.menu.menu_file_explorer);
+        menu.setOnMenuItemClickListener(item -> {
+            itemMenuClickListener.onItemClick(item.getItemId(), pos);
+            return true;
+        });
+        
+        menu.show();
+    }
+    
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        itemClickListener = listener;
+    }
+    
+    public void setOnItemMenuClickListener(OnItemMenuClickListener listener) {
+        itemMenuClickListener = listener;
+    }
+    
+    public interface OnItemClickListener {
         public void onClick(int pos);
+    }
+    
+    public interface OnItemMenuClickListener {
+        public void onItemClick(int itemId, int pos);
     }
 }

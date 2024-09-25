@@ -10,6 +10,10 @@ public abstract class AbstractFile implements Serializable {
         this.file = file;
     }
     
+    public void setFile(File f) {
+        file = f;
+    }
+    
     public String getPath() {
         return file.getPath();
     }

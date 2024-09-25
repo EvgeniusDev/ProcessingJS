@@ -20,7 +20,7 @@ public class FileIconProvider {
         this.context = context;
         this.baseIcons = new HashMap<>();
         
-        baseIcons.put(".js", context.getDrawable(R.drawable.ic_script_text_outline));
+        baseIcons.put(".js", context.getDrawable(R.drawable.ic_language_javascript));
         baseIcons.put(".html", context.getDrawable(R.drawable.ic_language_html5));
         baseIcons.put(".css", context.getDrawable(R.drawable.ic_language_css3));
         baseIcons.put(".cfg", context.getDrawable(R.drawable.ic_information_outline));
