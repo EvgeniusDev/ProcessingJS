@@ -1,0 +1,53 @@
+
+plugins {
+    id 'com.android.application'
+    
+}
+
+android {
+    namespace 'com.litesoft.processingjs'
+    compileSdk 33
+    
+    defaultConfig {
+        applicationId "com.litesoft.processingjs"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+        
+        vectorDrawables { 
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        viewBinding true
+        
+    }
+    
+}
+
+dependencies {
+    implementation(platform("io.github.Rosemoe.sora-editor:bom:0.21.0"))
+    implementation("io.github.Rosemoe.sora-editor:editor")
+    implementation("io.github.Rosemoe.sora-editor:language-textmate")
+    
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.code.gson:gson:2.8.5")
+    implementation("com.google.guava:guava:18.0")
+}

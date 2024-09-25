@@ -1,0 +1,50 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/MainActivity.java",
+      "selection": {
+        "end": {
+          "column": 9,
+          "index": 8240,
+          "line": 262
+        },
+        "start": {
+          "column": 9,
+          "index": 8240,
+          "line": 262
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/project/files/TextFile.java",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/project/files/AbstractFile.java",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/MainActivity.java"
+}

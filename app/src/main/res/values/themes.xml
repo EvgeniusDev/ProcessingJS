@@ -1,0 +1,33 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">#ffb49d</item>
+        <item name="colorOnPrimary">#601400</item>
+        <item name="colorPrimaryContainer">#842404</item>
+        <item name="colorOnPrimaryContainer">#ffdacf</item>
+        <item name="colorSecondary">#e7bdb2</item>
+        <item name="colorOnSecondary">#442a22</item>
+        <item name="colorSecondaryContainer">#5d3f37</item>
+        <item name="colorOnSecondaryContainer">#ffdacf</item>
+        <item name="colorTertiary">#d8c58d</item>
+        <item name="colorOnTertiary">#3a2f05</item>
+        <item name="colorTertiaryContainer">#53461a</item>
+        <item name="colorOnTertiaryContainer">#f5e1a6</item>
+        <item name="colorError">#ffb4a9</item>
+        <item name="colorOnError">#680003</item>
+        <item name="colorErrorContainer">#930006</item>
+        <item name="colorOnErrorContainer">#ffb4a9</item>
+        <item name="android:windowBackground">#201a18</item>
+        <item name="colorOnBackground">#ede0dd</item>
+        <item name="colorSurface">#201a18</item>
+        <item name="colorSurfaceInverse">#ede0dd</item>
+        <item name="colorOnSurfaceInverse">#362f2d</item>
+        <item name="colorPrimaryInverse">#a53c1b</item>
+        <item name="colorSurfaceVariant">#53433f</item>
+        <item name="colorOnSurfaceVariant">#d8c2bc</item>
+        <item name="colorOutline">#a08c87</item>
+
+        <item name="android:windowBackground">#201a18</item>
+        <item name="android:statusBarColor">#00000000</item>
+        <item name="android:navigationBarColor">#00000000</item>
+    </style>
+</resources>
