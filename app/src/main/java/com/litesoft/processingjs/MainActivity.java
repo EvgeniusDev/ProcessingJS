@@ -27,7 +27,7 @@ import com.litesoft.processingjs.events.FileDeletedEvent;
 import com.litesoft.processingjs.events.FileRenamedEvent;
 import com.litesoft.processingjs.events.FolderRenamedEvent;
 import com.litesoft.processingjs.explorer.FileExplorerFragment;
-import com.litesoft.processingjs.editor.CodeEditorView;
+import com.litesoft.processingjs.editor.widget.CodeEditor;
 
 import com.litesoft.processingjs.project.files.ProjectFile;
 import com.litesoft.processingjs.project.files.TextFile;
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-      //  saveFiles();
+        saveFiles();
     }
     
     @Override
@@ -217,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
         if (index != null && index.exists()) {
             Intent intent = new Intent(this, PlayActivity.class);
             intent.putExtra(PlayActivity.EXTRA_URL, index.getAbsolutePath());
+            intent.putExtra("project", projectFile);
             startActivity(intent);
         }
     }

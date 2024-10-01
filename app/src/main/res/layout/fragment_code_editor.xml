@@ -4,30 +4,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/code_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="8dp">
+    android:layout_height="match_parent">
 
-    <ScrollView
+    <HorizontalScrollView
+        android:id="@+id/scroller_horz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <HorizontalScrollView
+        <ScrollView
+            android:id="@+id/scroller_vert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.litesoft.processingjs.editor.CodeEditorView
+            <com.litesoft.processingjs.editor.widget.CodeEditor
                 android:id="@+id/editor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:gravity="top"
                 android:textSize="16sp"
-                android:textColor="#ffffff"
-                android:fontFamily="@font/source_code_pro"
                 android:background="#00000000"
-                android:textCursorDrawable="@drawable/cursor" />
+                android:importantForAutofill="no"
+                android:fontFamily="@font/jetbrains_mono"/>
 
-        </HorizontalScrollView>
+        </ScrollView>
 
-    </ScrollView>
-
+    </HorizontalScrollView>
+    
 </LinearLayout>
