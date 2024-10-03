@@ -76,7 +76,7 @@ public class CodeEditor extends MultiAutoCompleteTextView {
         if (file.getName().endsWith(".js")) {
             attachPlugin(SyntaxHighlightPlugin.class);
             attachPlugin(BracketsHighlightPlugin.class);
-            attachPlugin(CodeBlockHighlightPlugin.class);
+            //attachPlugin(CodeBlockHighlightPlugin.class);
             attachPlugin(AutoCloseBracketsPlugin.class);
             attachPlugin(AutoIndentPlugin.class);
         }
@@ -100,18 +100,8 @@ public class CodeEditor extends MultiAutoCompleteTextView {
                 for (Plugin plugin : getPlugins()) {
                     plugin.onScrollChanged();
                 }
+                    
                 invalidate();
-            }
-        });
-            
-        
-        
-        post(new Runnable() {
-            @Override
-            public void run() {
-                setMinWidth(codeContainer.getWidth());
-                setMinHeight(codeContainer.getHeight());
-              //  setMaxHeight(codeContainer.getHeight());
             }
         });
     }

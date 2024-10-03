@@ -6,12 +6,13 @@ import android.graphics.Color;
 public class GithubDarkTheme extends ITheme {
     
     public GithubDarkTheme() {
-        colorBackground = Color.parseColor("#24292d");
+        colorBackground = Color.parseColor("#1b1b1b");
         colorSelectedLine= Color.parseColor("#2e353a");
         colorLineNumberDigits = Color.parseColor("#444f56");
         colorLineNumberDivider = Color.parseColor("#1b1e23");
-        colorLineNumberPanel = Color.parseColor("#24292d");
+        colorLineNumberPanel = Color.parseColor("#1b1b1b");
         colorPairBrackets = Color.parseColor("#444f56");
+        colorPairBracketsText = Color.parseColor("#e76e7d");
         colorBlocksLine = Color.parseColor("#444f56");
         colorTextPlain = Color.parseColor("#e0e3e8");
         colorKeywords = Color.parseColor("#e76e7d");

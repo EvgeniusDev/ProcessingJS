@@ -9,7 +9,8 @@
     <HorizontalScrollView
         android:id="@+id/scroller_horz"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
         <ScrollView
             android:id="@+id/scroller_vert"
@@ -22,9 +23,11 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:gravity="top"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:background="#00000000"
                 android:importantForAutofill="no"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="text|textNoSuggestions|textMultiLine|textVisiblePassword"
                 android:fontFamily="@font/jetbrains_mono"/>
 
         </ScrollView>

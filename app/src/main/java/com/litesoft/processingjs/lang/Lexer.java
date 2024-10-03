@@ -33,8 +33,14 @@ public class Lexer {
         while (pos < length) {
             char ch = peek(0);
             
-            if (OPERATORS.indexOf(ch) != -1) {
+            /*if (OPERATORS.indexOf(ch) != -1) {
                 tokenizeOperator();
+            }*/
+            if (ch == '/' && peek(1) == '/') {
+                tokenizeComment();
+            }
+            else if (ch == '/' && peek(1) == '*') {
+                tokenizeBlockComment();
             }
             else if (ch == '"') {
                 tokenizeString();

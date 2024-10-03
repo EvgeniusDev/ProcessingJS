@@ -58,14 +58,14 @@ public class SyntaxHighlightPlugin extends Plugin {
     @Override
     public void onScrollChanged() {
         super.onScrollChanged();
-        updateSyntaxHighlight();
+        //updateSyntaxHighlight();
     }
 
     
     @Override
     public void onSizeChanged(int width, int height) {
         super.onSizeChanged(width, height);
-        updateSyntaxHighlight();
+       // updateSyntaxHighlight();
     }
     
     
@@ -107,10 +107,13 @@ public class SyntaxHighlightPlugin extends Plugin {
             boolean isValid = result.start <= result.end;
             boolean isVisible = (result.start >= lineStart && result.start <= lineEnd) || (result.start <= lineEnd && result.end >= lineStart);
             
-            if (isInText && isValid && isVisible) {
+            /*if (isInText && isValid && isVisible) {
                 int start = result.start < lineStart ? lineStart : result.start;
                 int end = result.end > lineEnd ? lineEnd : result.end;
-                
+                */
+                int start = result.start;
+                int end = result.end;
+            
                 switch (result.type) {
                     case NUMBER: {
                         editable.setSpan(new SyntaxHighlightSpan(theme.colorNumbers, Typeface.NORMAL), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -147,7 +150,7 @@ public class SyntaxHighlightPlugin extends Plugin {
                         editable.setSpan(new SyntaxHighlightSpan(theme.colorComments, Typeface.NORMAL), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         continue;
                     }
-                }
+               // }
             }
         }
     }

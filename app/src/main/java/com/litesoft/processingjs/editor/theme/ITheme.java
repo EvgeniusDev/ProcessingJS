@@ -7,6 +7,7 @@ public abstract class ITheme {
     public int colorLineNumberDivider = 0;
     public int colorLineNumberPanel = 0;
     public int colorPairBrackets = 0;
+    public int colorPairBracketsText = 0;
     public int colorBlocksLine = 0;
     public int colorTextPlain = 0;
     public int colorKeywords = 0;

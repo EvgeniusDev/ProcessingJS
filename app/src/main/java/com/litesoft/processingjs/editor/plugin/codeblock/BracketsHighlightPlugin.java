@@ -18,8 +18,8 @@ public class BracketsHighlightPlugin extends Plugin {
         super.attach();
         
         var theme = editor.getTheme();
-        openDelimiterSpan = new BracketHighlightSpan(theme.colorPairBrackets);
-        closedDelimiterSpan = new BracketHighlightSpan(theme.colorPairBrackets);
+        openDelimiterSpan = new BracketHighlightSpan(theme.colorPairBrackets, theme.colorPairBracketsText);
+        closedDelimiterSpan = new BracketHighlightSpan(theme.colorPairBrackets, theme.colorPairBracketsText);
     }
     
     
@@ -96,7 +96,7 @@ public class BracketsHighlightPlugin extends Plugin {
 
     @Override
     public void onThemeChanged(ITheme theme) {
-        openDelimiterSpan = new BracketHighlightSpan(theme.colorPairBrackets);
-        closedDelimiterSpan = new BracketHighlightSpan(theme.colorPairBrackets);
+        openDelimiterSpan = new BracketHighlightSpan(theme.colorPairBrackets, theme.colorPairBracketsText);
+        closedDelimiterSpan = new BracketHighlightSpan(theme.colorPairBrackets, theme.colorPairBracketsText);
     }
 }
