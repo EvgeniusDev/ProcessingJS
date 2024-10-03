@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="8dp">
+
+        <com.litesoft.processingjs.editor.tools.colorpicker.ColorRect
+            android:id="@+id/color_rect"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <View
+            android:id="@+id/color_preview"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ic_circle"
+            android:backgroundTint="#ff0000" />
+
+        <com.litesoft.processingjs.editor.tools.colorpicker.HueSlider
+            android:id="@+id/hue_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:splitTrack="false"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:thumbOffset="14dp"
+            android:thumb="@drawable/thumb_hue_slider"
+            android:progressDrawable="@drawable/track_hue_slider" />
+
+    </LinearLayout>
+
+</LinearLayout>

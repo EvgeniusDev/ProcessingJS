@@ -15,4 +15,16 @@
         android:icon="@drawable/ic_content_save_outline"
         app:showAsAction="never"/>
     
+    <item
+        android:id="@+id/menu_set_orientation"
+        android:title="Ориентация"
+        android:icon="@drawable/ic_phone_rotate_landscape"
+        app:showAsAction="never"/>
+    
+    <item
+        android:id="@+id/menu_colorpicker"
+        android:title="Инструменты"
+        android:icon="@drawable/ic_palette_outline"
+        app:showAsAction="never"/>
+    
 </menu>

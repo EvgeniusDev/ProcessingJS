@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.litesoft.processingjs.utils.FileUtil;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import com.litesoft.processingjs.project.files.ProjectFile;
+import java.util.HashMap;
 
 public class ProjectModifier {
     private Context context;
@@ -52,6 +55,18 @@ public class ProjectModifier {
         text = text.replace("PROJECT_PATH", "file://" + projectFile.getBaseFile().getAbsolutePath() + "/");
         FileUtil.writeFile(index, text);
     }
+    
+    
+    public void setupOrientation(String[] values, int selected) {
+        File config = projectFile.getFile("config.cfg");
+        String text = FileUtil.readFile(config);
+        
+        var type = new TypeToken<HashMap<String, Object>>(){}.getType();
+        HashMap<String, Object> map = new Gson().fromJson(text, type);
+        map.put("orientation", values[selected]);
+        FileUtil.writeFile(config, new Gson().toJson(map));
+    }
+    
     
     private void copyFileFromAssets(String assetFileName, String destinationFilePath) {
         AssetManager assetManager = context.getAssets();

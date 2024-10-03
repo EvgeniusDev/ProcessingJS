@@ -23,12 +23,14 @@ import com.google.common.eventbus.Subscribe;
 import com.litesoft.processingjs.databinding.ActivityMainBinding;
 import com.litesoft.processingjs.editor.CodeEditorFragment;
 
+import com.litesoft.processingjs.editor.tools.colorpicker.ColorPickerDialog;
 import com.litesoft.processingjs.events.FileDeletedEvent;
 import com.litesoft.processingjs.events.FileRenamedEvent;
 import com.litesoft.processingjs.events.FolderRenamedEvent;
 import com.litesoft.processingjs.explorer.FileExplorerFragment;
 import com.litesoft.processingjs.editor.widget.CodeEditor;
 
+import com.litesoft.processingjs.project.ProjectModifier;
 import com.litesoft.processingjs.project.files.ProjectFile;
 import com.litesoft.processingjs.project.files.TextFile;
 
@@ -205,11 +207,40 @@ public class MainActivity extends AppCompatActivity {
     private void onMenuItemClicked(int id) {
         if (id == R.id.menu_save) {
             saveFiles();
-        } else if (id == R.id.menu_run) {
+        }
+        else if (id == R.id.menu_set_orientation) {
+            setupOrientation();
+        } 
+        else if (id == R.id.menu_colorpicker) {
+            showColorPicker();
+        }
+        else if (id == R.id.menu_run) {
             saveFiles();
             runSketch();
         }
     }
+    
+    
+    private void showColorPicker() {
+        var dialog = new ColorPickerDialog(this);
+    }
+    
+    
+    private void setupOrientation() {
+        String[] orientationNames = {"Вертикальная", "Горизонтальная"};
+        String[] orientationValues = {"portrait", "landscape"};
+        
+        new MaterialAlertDialogBuilder(this)
+        .setTitle("Выберите ориентацию проекта")
+        .setSingleChoiceItems(orientationNames, 0, (d, w) -> {
+            ProjectModifier modifier = new ProjectModifier(MainActivity.this);
+            modifier.setProject(projectFile);
+            modifier.setupOrientation(orientationValues, w);
+        })
+        .create()
+        .show();
+    }
+    
     
     private void runSketch() {
         File index = projectFile.getFile("index.html");

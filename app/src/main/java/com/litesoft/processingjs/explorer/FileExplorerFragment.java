@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.MainThread;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.litesoft.processingjs.GlobalEventBus;
 import com.litesoft.processingjs.databinding.DialogTextinputBinding;
@@ -22,6 +24,7 @@ import com.litesoft.processingjs.events.FolderRenamedEvent;
 import com.litesoft.processingjs.project.files.ProjectFile;
 import com.litesoft.processingjs.utils.FileNameInputValidator;
 import com.litesoft.processingjs.utils.FileUtil;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
