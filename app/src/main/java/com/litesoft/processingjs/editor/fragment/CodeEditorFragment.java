@@ -48,6 +48,10 @@ public class CodeEditorFragment extends Fragment {
     
     
     public void updateSize() {
+        if (container == null) {
+            return;
+        }
+        
         editor.setMinWidth(container.getWidth());
         editor.setMinHeight(container.getHeight());
     }

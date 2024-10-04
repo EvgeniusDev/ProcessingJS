@@ -11,8 +11,8 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,18 +20,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.shape.MaterialShapeDrawable;
-import com.litesoft.processingjs.databinding.ActivityHomeBinding;
 
+import com.litesoft.processingjs.databinding.ActivityHomeBinding;
 import com.litesoft.processingjs.databinding.DialogTextinputBinding;
 import com.litesoft.processingjs.project.CreatingProjectDialog;
 import com.litesoft.processingjs.project.files.ProjectFile;
 import com.litesoft.processingjs.project.ProjectListAdapter;
-
 import com.litesoft.processingjs.project.ProjectModifier;
 import com.litesoft.processingjs.utils.DeleteFileDialog;
 import com.litesoft.processingjs.utils.FileNameInputValidator;
 import com.litesoft.processingjs.utils.FileUtil;
 import com.litesoft.processingjs.utils.RecyclerSpaceDecorator;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,6 +41,7 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
     public static final String PROJECTS_FOLDER = "/P5Projects/";
+    public static String HOME_DIRECTORY;
     
     private ActivityHomeBinding binding;
     
@@ -51,6 +52,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         WindowCompat.setDecorFitsSystemWindows(getWindow(), true);
+        
+        HOME_DIRECTORY = getFilesDir().getAbsolutePath();
         
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -124,7 +127,7 @@ public class HomeActivity extends AppCompatActivity {
         
         projectFiles.clear();
             
-        File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + PROJECTS_FOLDER);
+        File folder = new File(HOME_DIRECTORY + PROJECTS_FOLDER);
         
         if (folder.exists() && folder.listFiles() != null) {
             for (File file : folder.listFiles()) {
@@ -204,7 +207,7 @@ public class HomeActivity extends AppCompatActivity {
     }
     
     private void createProject(String name) {
-        File file = new File(Environment.getExternalStorageDirectory() + PROJECTS_FOLDER + name);
+        File file = new File(HOME_DIRECTORY + PROJECTS_FOLDER + name);
         var project = new ProjectFile(file);
         
         ProjectModifier modifier = new ProjectModifier(this);

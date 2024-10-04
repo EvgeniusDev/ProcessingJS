@@ -32,12 +32,16 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
+        <FrameLayout
             android:id="@+id/code_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="48dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+        <include layout="@layout/layout_console"
+            android:id="@+id/console_container"/>
+        
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView

@@ -25,7 +25,6 @@ import com.google.common.eventbus.Subscribe;
 
 import com.litesoft.processingjs.databinding.ActivityMainBinding;
 import com.litesoft.processingjs.editor.fragment.CodeEditorFragment;
-import com.litesoft.processingjs.editor.fragment.CodeFragmentAdapter;
 import com.litesoft.processingjs.editor.tools.colorpicker.ColorPickerDialog;
 import com.litesoft.processingjs.events.FileDeletedEvent;
 import com.litesoft.processingjs.events.FileRenamedEvent;
@@ -53,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
 
     private TabLayout tabLayout;
-    private ViewPager2 codePager;
-    private CodeFragmentAdapter adapter;
+    private TabLayout.OnTabSelectedListener tabLayoutListener;
+    private CodeEditorFragment currentFragment;
     private List<CodeEditorFragment> fragments = new ArrayList<>();
 
     private FileExplorerFragment explorerFragment;
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        
         binding.appBarLayout.setStatusBarForegroundColor(MaterialColors.getColor(binding.appBarLayout, com.google.android.material.R.attr.colorSurface));
         binding.toolbar.setTitle(projectFile.getName());
         ((MenuBuilder) binding.toolbar.getMenu()).setOptionalIconsVisible(true);
@@ -86,16 +85,20 @@ public class MainActivity extends AppCompatActivity {
 
         
         tabLayout = binding.tablayout;
-        codePager = binding.codePager;
-        
-        adapter = new CodeFragmentAdapter(getSupportFragmentManager(), getLifecycle());
-        adapter.setFragments(fragments);
-        codePager.setAdapter(adapter);
-        
-        new TabLayoutMediator(tabLayout, codePager, (tab, position) -> {
-            tab.setText(fragments.get(position).getName());
-        })
-        .attach();
+        tabLayoutListener = new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                setCurrentFragment(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        };
+
+        tabLayout.setOnTabSelectedListener(tabLayoutListener);
         
         
         explorerFragment = new FileExplorerFragment(projectFile);
@@ -118,8 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 int keypadHeight = screenHeight - r.bottom;
 
                 if (keypadHeight < screenHeight * 0.15) {
-                    var fragment = fragments.get(codePager.getCurrentItem());
-                    fragment.updateSize();
+                    currentFragment.updateSize();
                 }
             }
         });
@@ -155,8 +157,74 @@ public class MainActivity extends AppCompatActivity {
             saveFiles();
             runSketch();
         }
+        else if (id == R.id.menu_close) {
+            int pos = tabLayout.getSelectedTabPosition();
+            closeTab(pos);
+        }
     }
     
+    
+    public void setCurrentFragment(int index) {
+        CodeEditorFragment fragment = fragments.get(index);
+        getSupportFragmentManager()
+        .beginTransaction()
+        .replace(R.id.code_pager, fragment)
+        .commit();
+        
+        currentFragment = fragment;
+        
+        tabLayout.removeOnTabSelectedListener(tabLayoutListener);
+        tabLayout.selectTab(tabLayout.getTabAt(index));
+        tabLayout.setOnTabSelectedListener(tabLayoutListener);
+    }
+    
+    private void detachFragment() {
+        if (currentFragment == null) {
+            return;
+        }
+        
+        getSupportFragmentManager()
+        .beginTransaction()
+        .detach(currentFragment)
+        .commit();
+    }
+    
+    private void closeTab(int tabPosition) {
+        if (tabCount() > 0){
+            fragments.remove(tabPosition);
+            tabLayout.removeTabAt(tabPosition);
+        }
+        
+        if (tabCount() == 0) {
+            closeAllTabs();
+            return;
+        }
+        
+        if (tabPosition == 0 && tabCount() > 0) {
+            setCurrentFragment(0);
+            return;
+        }
+            
+        if (tabPosition == tabCount() && tabCount() > 0) {
+            setCurrentFragment(tabCount()-1);
+            return;
+        }
+            
+        if (tabPosition > 0 && tabPosition < tabCount()) {
+            setCurrentFragment(tabPosition);
+            return;
+        }
+    }
+    
+    private void closeAllTabs() {
+        fragments.clear();
+        tabLayout.removeAllTabs();
+        detachFragment();
+    }
+    
+    private int tabCount() {
+        return fragments.size();
+    }
     
     private void showColorPicker() {
         var dialog = new ColorPickerDialog(this);
@@ -199,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
     private void openFile(File file) {
         if (file.exists() && isTextFile(file)) {
             if (isFileOpened(file)) {
-                codePager.setCurrentItem(getFileTabPosition(file));
+                setCurrentFragment(getFileTabPosition(file));
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return;
             }
@@ -208,8 +276,9 @@ public class MainActivity extends AppCompatActivity {
             TextFile textFile = new TextFile(file);
             
             fragments.add(new CodeEditorFragment(textFile));
-            adapter.notifyOnItemChanged(fragments.size()-1);
-            adapter.notifyItemInserted(fragments.size()-1);
+            tabLayout.addTab(tabLayout.newTab().setText(textFile.getName()));
+            
+            setCurrentFragment(fragments.size()-1);
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
@@ -255,9 +324,7 @@ public class MainActivity extends AppCompatActivity {
             
             if (file.getName().equals(event.file.getName())) {
                 int pos = getFileTabPosition(event.file);
-                fragments.remove(pos);
-                adapter.notifyOnItemChanged(pos);
-                adapter.notifyItemRemoved(pos);
+                closeTab(pos);
                 return;
             }
         }
