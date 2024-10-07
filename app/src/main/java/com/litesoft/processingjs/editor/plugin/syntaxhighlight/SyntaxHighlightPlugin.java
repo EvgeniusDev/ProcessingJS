@@ -10,7 +10,7 @@ import com.litesoft.processingjs.editor.plugin.base.Plugin;
 import com.litesoft.processingjs.editor.theme.ITheme;
 import com.litesoft.processingjs.editor.util.HexColorSpan;
 import com.litesoft.processingjs.editor.util.SyntaxHighlightSpan;
-import com.litesoft.processingjs.lang.SyntaxHighlightResult;
+import com.litesoft.processingjs.editor.lang.SyntaxHighlightResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,7 @@ public class SyntaxHighlightPlugin extends Plugin {
     @Override
     public void onSizeChanged(int width, int height) {
         super.onSizeChanged(width, height);
-       // updateSyntaxHighlight();
+        updateSyntaxHighlight();
     }
     
     
@@ -115,6 +115,7 @@ public class SyntaxHighlightPlugin extends Plugin {
                 int end = result.end;
             
                 switch (result.type) {
+                    case LANG_CONST:
                     case NUMBER: {
                         editable.setSpan(new SyntaxHighlightSpan(theme.colorNumbers, Typeface.NORMAL), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         continue;
@@ -130,6 +131,11 @@ public class SyntaxHighlightPlugin extends Plugin {
                         continue;
                     }
                     
+                    case TYPE: {
+                        editable.setSpan(new SyntaxHighlightSpan(theme.colorTypes, Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        continue;
+                    }
+                
                     case FUNCTION: {
                         editable.setSpan(new SyntaxHighlightSpan(theme.colorFunctions, Typeface.NORMAL), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         continue;

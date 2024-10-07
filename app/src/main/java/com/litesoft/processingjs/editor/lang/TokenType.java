@@ -1,4 +1,4 @@
-package com.litesoft.processingjs.lang;
+package com.litesoft.processingjs.editor.lang;
 
 public enum TokenType {
     NUMBER,

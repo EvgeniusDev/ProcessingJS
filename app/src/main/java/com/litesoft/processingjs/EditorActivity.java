@@ -23,7 +23,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.common.eventbus.Subscribe;
 
-import com.litesoft.processingjs.databinding.ActivityMainBinding;
+import com.litesoft.processingjs.databinding.ActivityEditorBinding;
 import com.litesoft.processingjs.editor.fragment.CodeEditorFragment;
 import com.litesoft.processingjs.editor.tools.colorpicker.ColorPickerDialog;
 import com.litesoft.processingjs.events.FileDeletedEvent;
@@ -40,14 +40,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class EditorActivity extends AppCompatActivity {
     public static final String EXTRA_PROJECT = "project";
 
     private final String[] SUPPORT_FORMATS = {".js", ".html", ".css", ".cfg"};
 
     private ProjectFile projectFile;
-
-    private ActivityMainBinding binding;
+    private ProjectModifier projectModifier;
+    
+    private ActivityEditorBinding binding;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
 
@@ -64,8 +65,10 @@ public class MainActivity extends AppCompatActivity {
         GlobalEventBus.register(this);
 
         projectFile = (ProjectFile) getIntent().getSerializableExtra(EXTRA_PROJECT);
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        projectModifier = new ProjectModifier(this);
+        projectModifier.setProject(projectFile);
+        
+        binding = ActivityEditorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         
         binding.appBarLayout.setStatusBarForegroundColor(MaterialColors.getColor(binding.appBarLayout, com.google.android.material.R.attr.colorSurface));
@@ -138,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
     
     @Override
     protected void onDestroy() {
+        GlobalEventBus.unregister(this);
         super.onDestroy();
         this.binding = null;
     }
@@ -147,9 +151,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.menu_save) {
             saveFiles();
         }
-        else if (id == R.id.menu_set_orientation) {
-            setupOrientation();
-        } 
         else if (id == R.id.menu_colorpicker) {
             showColorPicker();
         }
@@ -228,22 +229,6 @@ public class MainActivity extends AppCompatActivity {
     
     private void showColorPicker() {
         var dialog = new ColorPickerDialog(this);
-    }
-    
-    
-    private void setupOrientation() {
-        String[] orientationNames = {"Вертикальная", "Горизонтальная"};
-        String[] orientationValues = {"portrait", "landscape"};
-        
-        new MaterialAlertDialogBuilder(this)
-        .setTitle("Выберите ориентацию проекта")
-        .setSingleChoiceItems(orientationNames, 0, (d, w) -> {
-            ProjectModifier modifier = new ProjectModifier(MainActivity.this);
-            modifier.setProject(projectFile);
-            modifier.setupOrientation(orientationValues, w);
-        })
-        .create()
-        .show();
     }
     
     

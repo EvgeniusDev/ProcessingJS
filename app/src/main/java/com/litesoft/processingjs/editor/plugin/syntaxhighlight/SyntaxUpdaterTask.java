@@ -4,8 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.litesoft.processingjs.lang.Lexer;
-import com.litesoft.processingjs.lang.SyntaxHighlightResult;
+import com.litesoft.processingjs.editor.lang.Lexer;
+import com.litesoft.processingjs.editor.lang.SyntaxHighlightResult;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

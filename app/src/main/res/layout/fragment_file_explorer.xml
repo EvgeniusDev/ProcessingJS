@@ -9,38 +9,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_weight="1"
             android:textSize="20sp"
             android:textColor="?attr/colorOnSurface"
             android:text="Файлы проекта" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/btn_create_file"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1"
-                android:text="Новый файл" />
-
-            <Button
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:id="@+id/btn_create_folder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Новая папка" />
-
-        </LinearLayout>
+        <Button
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:id="@+id/btn_create_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_plus" />
 
     </LinearLayout>
 

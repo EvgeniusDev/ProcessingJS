@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.litesoft.processingjs.editor.theme.impl.GithubDarkTheme;
 import com.litesoft.processingjs.databinding.FragmentCodeEditorBinding;
+import com.litesoft.processingjs.editor.theme.impl.MaterialLightTheme;
 import com.litesoft.processingjs.editor.widget.CodeEditor;
 import com.litesoft.processingjs.project.files.TextFile;
 import com.litesoft.processingjs.R;
@@ -42,7 +43,7 @@ public class CodeEditorFragment extends Fragment {
         container = view.findViewById(R.id.code_container);
         editor = view.findViewById(R.id.editor);
         editor.bindContainer(container);
-        editor.setTheme(new GithubDarkTheme());
+        editor.setTheme(new MaterialLightTheme());
         editor.openFile(textFile);
     }
     

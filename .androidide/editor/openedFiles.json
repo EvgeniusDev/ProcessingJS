@@ -1,0 +1,80 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/EditorActivity.java",
+      "selection": {
+        "end": {
+          "column": 5,
+          "index": 5161,
+          "line": 133
+        },
+        "start": {
+          "column": 5,
+          "index": 5161,
+          "line": 133
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/HomeActivity.java",
+      "selection": {
+        "end": {
+          "column": 5,
+          "index": 8419,
+          "line": 224
+        },
+        "start": {
+          "column": 5,
+          "index": 8419,
+          "line": 224
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/res/menu/menu_editor.xml",
+      "selection": {
+        "end": {
+          "column": 4,
+          "index": 663,
+          "line": 22
+        },
+        "start": {
+          "column": 4,
+          "index": 663,
+          "line": 22
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/project/ProjectModifier.java",
+      "selection": {
+        "end": {
+          "column": 5,
+          "index": 2412,
+          "line": 67
+        },
+        "start": {
+          "column": 5,
+          "index": 2412,
+          "line": 67
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/AndroidManifest.xml",
+      "selection": {
+        "end": {
+          "column": 4,
+          "index": 271,
+          "line": 7
+        },
+        "start": {
+          "column": 4,
+          "index": 271,
+          "line": 7
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/ProcessingJS/app/src/main/java/com/litesoft/processingjs/project/ProjectModifier.java"
+}

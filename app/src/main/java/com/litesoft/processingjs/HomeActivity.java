@@ -53,7 +53,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         WindowCompat.setDecorFitsSystemWindows(getWindow(), true);
         
-        HOME_DIRECTORY = getFilesDir().getAbsolutePath();
+        //HOME_DIRECTORY = getFilesDir().getAbsolutePath();
+        HOME_DIRECTORY = Environment.getExternalStorageDirectory().getAbsolutePath();
         
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -65,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
         
         binding.projects.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         binding.projects.setAdapter(projectListAdapter);
-        binding.projects.addItemDecoration(new RecyclerSpaceDecorator((int) getResources().getDimension(R.dimen.recycler_space)));
+       // binding.projects.addItemDecoration(new RecyclerSpaceDecorator((int) getResources().getDimension(R.dimen.recycler_space)));
         
         binding.fab.setOnClickListener(v -> beginNewProject());
         
@@ -218,8 +219,8 @@ public class HomeActivity extends AppCompatActivity {
     }
     
     private void openProject(ProjectFile project) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(MainActivity.EXTRA_PROJECT, project);
+        Intent intent = new Intent(this, EditorActivity.class);
+        intent.putExtra(EditorActivity.EXTRA_PROJECT, project);
         startActivity(intent);
     }
 }

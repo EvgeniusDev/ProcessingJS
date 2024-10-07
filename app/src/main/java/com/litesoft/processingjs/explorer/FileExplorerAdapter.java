@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.color.MaterialColors;
 import com.litesoft.processingjs.databinding.ItemFileExplorerBinding;
 import java.io.File;
 import java.util.ArrayList;
@@ -104,6 +105,7 @@ public class FileExplorerAdapter extends RecyclerView.Adapter<FileExplorerAdapte
         
         menu.show();
     }
+    
     
     public void setOnItemClickListener(OnItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;

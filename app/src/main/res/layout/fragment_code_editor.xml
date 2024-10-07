@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:gravity="top"
-                android:textSize="17sp"
+                android:textSize="18sp"
                 android:background="#00000000"
                 android:importantForAutofill="no"
                 android:imeOptions="flagNoExtractUi"

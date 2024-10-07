@@ -22,12 +22,6 @@
         app:showAsAction="never"/>
     
     <item
-        android:id="@+id/menu_set_orientation"
-        android:title="Ориентация"
-        android:icon="@drawable/ic_phone_rotate_landscape"
-        app:showAsAction="never"/>
-    
-    <item
         android:id="@+id/menu_colorpicker"
         android:title="Палитра"
         android:icon="@drawable/ic_palette_outline"

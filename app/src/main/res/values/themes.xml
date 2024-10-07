@@ -31,6 +31,40 @@
         <item name="android:navigationBarColor">#00000000</item>
     </style>
     
+    
+    <style name="MaterialLightTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">#6834ea</item>
+        <item name="colorOnPrimary">#ffffff</item>
+        <item name="colorPrimaryContainer">#e8ddff</item>
+        <item name="colorOnPrimaryContainer">#1f0060</item>
+        <item name="colorSecondary">#615b71</item>
+        <item name="colorOnSecondary">#ffffff</item>
+        <item name="colorSecondaryContainer">#e7dff8</item>
+        <item name="colorOnSecondaryContainer">#1d192b</item>
+        <item name="colorTertiary">#7d5261</item>
+        <item name="colorOnTertiary">#ffffff</item>
+        <item name="colorTertiaryContainer">#ffd9e6</item>
+        <item name="colorOnTertiaryContainer">#31101e</item>
+        <item name="colorError">#ba1b1b</item>
+        <item name="colorOnError">#ffffff</item>
+        <item name="colorErrorContainer">#ffdad4</item>
+        <item name="colorOnErrorContainer">#410001</item>
+        <item name="colorOnBackground">#1c1b1e</item>
+        <item name="colorSurface">#fffbff</item>
+        <item name="colorOnSurface">#1c1b1e</item>
+        <item name="colorSurfaceInverse">#313033</item>
+        <item name="colorOnSurfaceInverse">#f4eff3</item>
+        <item name="colorPrimaryInverse">#cebdff</item>
+        <item name="colorSurfaceVariant">#e6e0ec</item>
+        <item name="colorOnSurfaceVariant">#48454e</item>
+        <item name="colorOutline">#79757f</item>
+
+        <item name="android:windowBackground">#fffbff</item>
+        <item name="android:statusBarColor">#00000000</item>
+        <item name="android:navigationBarColor">#00000000</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+    
     <style name="SketchPreviewTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>

@@ -1,4 +1,4 @@
-package com.litesoft.processingjs.lang;
+package com.litesoft.processingjs.editor.lang;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -33,15 +33,15 @@ public class Lexer {
         while (pos < length) {
             char ch = peek(0);
             
-            /*if (OPERATORS.indexOf(ch) != -1) {
+            if (OPERATORS.indexOf(ch) != -1) {
                 tokenizeOperator();
-            }*/
-            if (ch == '/' && peek(1) == '/') {
+            }
+           /* if (ch == '/' && peek(1) == '/') {
                 tokenizeComment();
             }
             else if (ch == '/' && peek(1) == '*') {
                 tokenizeBlockComment();
-            }
+            }*/
             else if (ch == '"') {
                 tokenizeString();
             }
@@ -137,7 +137,14 @@ public class Lexer {
         
         if (isKeyword(text.substring(start, end))) {
             results.add(new SyntaxHighlightResult(start, end, TokenType.KEYWORD));
-        } else {
+        } 
+        else if (isType(text.substring(start, end))) {
+            results.add(new SyntaxHighlightResult(start, end, TokenType.TYPE));
+        }
+        else if (isLangConst(text.substring(start, end))) {
+            results.add(new SyntaxHighlightResult(start, end, TokenType.LANG_CONST));
+        }
+        else {
             if (peek(0) == '(') {
                 results.add(new SyntaxHighlightResult(start, end, TokenType.FUNCTION));
             }
@@ -237,6 +244,26 @@ public class Lexer {
         return false;
     }
     
+    private boolean isType(String word) {
+        for (String str : types) {
+            if (str.equals(word)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private boolean isLangConst(String word) {
+        for (String str : langConsts) {
+            if (str.equals(word)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     static final String[] keywords = {
         "function",
         "super",
@@ -275,12 +302,20 @@ public class Lexer {
         "switch",
         "try",
         "while",
-        "const",
-        "var",
-        "let",
         "class",
         "interface",
-        "constructor",
+        "constructor"
+    };
+    
+    static final String[] types =
+    {
+        "const",
+        "var",
+        "let"
+    };
+    
+    static final String[] langConsts = 
+    {
         "true",
         "false",
         "null",

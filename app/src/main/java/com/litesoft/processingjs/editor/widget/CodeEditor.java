@@ -76,7 +76,7 @@ public class CodeEditor extends MultiAutoCompleteTextView {
         if (file.getName().endsWith(".js")) {
             attachPlugin(SyntaxHighlightPlugin.class);
             attachPlugin(BracketsHighlightPlugin.class);
-            //attachPlugin(CodeBlockHighlightPlugin.class);
+            attachPlugin(CodeBlockHighlightPlugin.class);
             attachPlugin(AutoCloseBracketsPlugin.class);
             attachPlugin(AutoIndentPlugin.class);
         }

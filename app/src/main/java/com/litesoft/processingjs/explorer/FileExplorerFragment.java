@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import com.litesoft.processingjs.GlobalEventBus;
 import com.litesoft.processingjs.databinding.DialogTextinputBinding;
 import com.litesoft.processingjs.databinding.FragmentFileExplorerBinding;
@@ -22,6 +23,8 @@ import com.litesoft.processingjs.events.FileDeletedEvent;
 import com.litesoft.processingjs.events.FileRenamedEvent;
 import com.litesoft.processingjs.events.FolderRenamedEvent;
 import com.litesoft.processingjs.project.files.ProjectFile;
+import com.litesoft.processingjs.ui.modalmenu.ModalMenuDialog;
+import com.litesoft.processingjs.utils.DeleteFileDialog;
 import com.litesoft.processingjs.utils.FileNameInputValidator;
 import com.litesoft.processingjs.utils.FileUtil;
 
@@ -71,11 +74,12 @@ public class FileExplorerFragment extends Fragment {
         });
         
         Button btnCreateFile = view.findViewById(R.id.btn_create_file);
-        btnCreateFile.setOnClickListener(v -> createFile(true));
+       // btnCreateFile.setOnClickListener(v -> createFile(true));
+        btnCreateFile.setOnClickListener(v -> showNewFileDialog());
         
-        Button btnCreateFolder = view.findViewById(R.id.btn_create_folder);
+        /*Button btnCreateFolder = view.findViewById(R.id.btn_create_folder);
         btnCreateFolder.setOnClickListener(v -> createFile(false));
-        
+        */
         recyclerView = view.findViewById(R.id.files);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
@@ -129,6 +133,16 @@ public class FileExplorerFragment extends Fragment {
         adapter.setElements(elements);
         adapter.notifyDataSetChanged();
     }
+    
+    
+    private void showNewFileDialog() {
+        var menu = new ModalMenuDialog(R.menu.menu_create_file, id -> {
+            
+        });
+        
+        menu.show(getActivity().getSupportFragmentManager(), "explorer");
+    }
+    
     
     private void createFile(boolean isFile) {
         var binding = DialogTextinputBinding.inflate(getLayoutInflater());
@@ -234,17 +248,11 @@ public class FileExplorerFragment extends Fragment {
     }
     
     private void handleDeleteFile(ExplorerElement element) {
-        new MaterialAlertDialogBuilder(getContext())
-        .setTitle("Удаление файла")
-        .setMessage("Вы уверены, что хотите удалить файл?")
-        .setNegativeButton("Нет", null)
-        .setPositiveButton("Да", (d, w) -> {
+        new DeleteFileDialog(getContext(), () -> {
             deleteFile(element.getFile());
             elements.remove(element);
             updateElements();
-        })
-        .create()
-        .show();
+        });
     }
     
     private void deleteFile(File file) {
